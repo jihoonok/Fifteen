@@ -1,37 +1,38 @@
 <?php
 	session_start();
+	require_once("support.php");
 
 	if (isset($_POST["logout"])) {
 		session_destroy();
 		header("Location: main.php");
+	} else if (isset($_POST["play"])) {
+		header("Location: fifteen.php");
+	} else if (isset($_POST["score"])) {
+		header("Location: score.php");
+	} else {
+
+		$title = "Menu";
+		$style = "css/signUpStyle.css";
+		
+		$body = "<script src=\"fifteen.js\" type=\"text/javascript\"></script>";
+		$body .= "<link href=\"https://webster.cs.washington.edu/images/fifteen/fifteen.gif\"
+					  type=\"image/gif\" rel=\"shortcut icon\" />";
+					  
+					  
+		$body .= <<< EOBODY
+			<div class="login">
+				<form action="{$_SERVER['PHP_SELF']}" method="post">
+					<h1 align="center">Menu</h1>
+					<input class="submit" type="submit" name="play" value="PLAY" />
+					<input class="submit" type="submit" name="score" value="MY SCORES"/>
+					<input class="submit" type="submit" name="score" value="LEADERBOARD"/>
+					<input class="submit" type="submit" name="logout", value="LOGOUT"/>
+				</form>
+			</div>
+EOBODY;
+	
+		$page = generatePage($body, $title,$style);
+				echo $page;	
 	}
 ?>
 
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8"/> 
-		<title>Menu</title>	
-		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
-
-	<body>
-		<div class="container">
-			<h1>Menu</h1>
-			<form action = "fifteen.php" method="post">
-				<input type="submit" name="submitInfoButton" value="Play" />
-			</form>
-			<form action = "setting.php" method="post">
-				<input type="submit" name="submitInfoButton" value="submit" />
-			</form>
-			<form action = "score.php" method="post">
-				<input type="submit" name="submitInfoButton" value="Score"/>
-			</form>
-			<form action = "<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-				<input type="submit" name="logout", value="logout"/>
-			</form>
-		</div>
-	</body>
-</html>

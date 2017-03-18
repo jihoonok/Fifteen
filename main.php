@@ -4,7 +4,7 @@
 	
 	$title = "Dennis the Penis";
 	$style = "css/loginStyle.css";
-	
+	/*
 	$host = "localhost";
 	$user = "fifteen";
 	$password = "puzzle";
@@ -13,7 +13,7 @@
 	
 	$db = connectToDB($host, $user, $password, $database);
 	
-	/*Connecting to database*/
+	/*Connecting to database
 	function connectToDB($host, $user, $password, $database) {
 		$db = mysqli_connect($host, $user, $password, $database);
 		if (mysqli_connect_errno()) {
@@ -22,6 +22,7 @@
 		}
 		return $db;
 	}	
+	*/
 	
 	if (isset($_SESSION['passwordValue']) && isset($_SESSION['userNameValue'])){
 		header("Location: menu.php");
@@ -29,7 +30,7 @@
 	
 		$topPart = <<<EOBODY
 		<form action="{$_SERVER['PHP_SELF']}" method="post">
-			<input type="text" name="name" placeholder="Username" required="true"/><br/>
+			<input type="text" name="login" placeholder="Username" required="true"/><br/>
           	<input type="password" name="password" placeholder="Password" required="true" /><br/>
 	      	<input class="submit" type="submit" name="submit" value="Sign In">
 			<a href="createaccount.php"><button class="submit" type="button">Sign Up</button></a><br>

@@ -7,7 +7,6 @@ function generatePage($body, $title="DontDoDrugs", $style="css/bootstrap.css") {
 		<head> 
 			<meta charset="utf-8">
 			<title>$title</title>			
-			
 			<link rel="stylesheet" type="text/css"  href="$style"/>
 		</head>
 				
