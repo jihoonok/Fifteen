@@ -1,0 +1,32 @@
+
+body {
+	text-align: center;
+	font-size: 14pt;
+	font-family: cursive;
+}
+
+#puzzlearea {
+	width: 400px;
+	height: 400px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tiles {
+	border: 5px solid black;
+	cursor: default;
+}
+
+.tilesHover {
+	border: 5px solid red;
+	cursor: pointer;
+}
+
+.tiles, .tilesHover {
+	position: absolute;
+	background-image: url("background.jpg");
+	width: 90px;
+	height: 90px;
+	font-size: 40pt;
+}
