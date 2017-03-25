@@ -1,11 +1,11 @@
 <?php
 	$body = "";
-	if (isset($_POST["submitScore"])) {
+
 		$host = "localhost";
 		$user = "dbuser";
 		$password = "goodbyeWorld";
 		$database = "groupdb";
-		$table = "scores"
+		$table = "scores";
 		$db = connectToDB($host, $user, $password, $database);
 
 		$sqlQuery = sprintf("select * from %s order by score asc", $table);
@@ -25,7 +25,7 @@
 			$body = "Retrieving records failed.".mysqli_error($db);
 		}
 		mysqli_close($db);	
-	}
+
 
 	function connectToDB($host, $user, $password, $database) {
 		$db = mysqli_connect($host, $user, $password, $database);
@@ -46,10 +46,5 @@
 
 	<body>
 		<?php echo $body ?>
-		<form action="SubmitApplication.php" method="post"> 
-			<strong>Email associated with application: </strong><input type="email" name="email"/><br /><br />
-			<strong>Password associated with application: </strong><input type="password" name="password"/><br /><br />	
-			<input type="submit" name="submitUpdate" value="submitUpdate"/><br /><br />
-		</form>
 	</body>
 </html>

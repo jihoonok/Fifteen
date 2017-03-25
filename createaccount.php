@@ -12,11 +12,13 @@
 			$table = "userinfo";
 			$db = connectToDB($host, $user, $password, $database);
 
-
 			$_SESSION["userNameValue"] = $_POST["name"];
 			$_SESSION["passwordValue"] = $_POST["password"];
-			$sqlQuery = sprintf("insert into $table (username, password) values ('%s', '%s')", trim($_POST["name"]), password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
-			$result = mysqil_query($db, $sqlQuery);
+			$name = trim($_POST["name"]);
+			$password = password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
+
+			$sqlQuery = sprintf("insert into $table (name, password) values ('%s', '%s')", $name, $password);
+			$result = mysqli_query($db, $sqlQuery);
 			if ($result) {
 				echo "Account creation successful";
 				header("Location: main.php");
@@ -24,8 +26,8 @@
 			} else {
 				echo "Account creation failed";
 			}
+			mysqli_close($db);
 		}
-		mysqli_close($db);
 	} 
 
 	function connectToDB($host, $user, $password, $database) {
