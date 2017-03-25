@@ -1,30 +1,21 @@
 <?php 
 	session_start();
-	$host = "localhost";
-	$user = "fifteen";
-	$password = "puzzle";
-	$database = "15db";
-	$table = "accountinfo";
-	/*
-	$db = connectToDB($host, $user, $password, $database);
-	
-	function connectToDB($host, $user, $password, $database) {
-		$db = mysqli_connect($host, $user, $password, $database);
-		if (mysqli_connect_errno()) {
-			echo "Connect failed.\n".mysqli_connect_error();
-			exit();
-		}
-		return $db;
-	}	
-	*/
 ?>
 
 <?php
 	if (isset($_POST["submitButton"])) {
 		if ($_POST["password"] == $_POST["confirmpass"]) {
+			$host = "localhost";
+			$user = "dbuser";
+			$password = "goodbyeWorld";
+			$database = "groupdb";
+			$table = "userinfo";
+			$db = connectToDB($host, $user, $password, $database);
+
+
 			$_SESSION["userNameValue"] = $_POST["name"];
 			$_SESSION["passwordValue"] = $_POST["password"];
-			//$sqlQuery = sprintf("insert into $table (username, password) values ('%s', '%s')", $_POST["name"], $_POST["password"];
+			$sqlQuery = sprintf("insert into $table (username, password) values ('%s', '%s')", trim($_POST["name"]), password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
 			$result = mysqil_query($db, $sqlQuery);
 			if ($result) {
 				echo "Account creation successful";
@@ -34,8 +25,17 @@
 				echo "Account creation failed";
 			}
 		}
-		mysqil_close($db);
+		mysqli_close($db);
 	} 
+
+	function connectToDB($host, $user, $password, $database) {
+		$db = mysqli_connect($host, $user, $password, $database);
+		if (mysqli_connect_errno()) {
+			echo "Connect failed.\n".mysqli_connect_error();
+			exit();
+		}
+		return $db;
+	}	
 ?>
 
 <!doctype html>
