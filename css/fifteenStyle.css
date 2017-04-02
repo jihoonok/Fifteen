@@ -1,4 +1,4 @@
-
+<?php session_start() ?>
 body {
 	text-align: center;
 	font-size: 14pt;
@@ -6,8 +6,8 @@ body {
 }
 
 #puzzlearea {
-	width: 400px;
-	height: 400px;
+	width: <?php echo $_SESSION["pixel"]?>px;
+	height: <?php echo $_SESSION["pixel"]?>px;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
@@ -29,4 +29,8 @@ body {
 	width: 90px;
 	height: 90px;
 	font-size: 40pt;
+}
+
+.control {
+	padding-top: 100px;
 }

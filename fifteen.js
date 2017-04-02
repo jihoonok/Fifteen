@@ -3,6 +3,7 @@
 	
 	//change these to update difficulty 
 	// ie empty = 3 means 4x4, empty = 4 means 5x5
+	var moves = 0;
 	var emptyR = 3;
 	var emptyC = 3;
 	var pixel = 100; // used for dimensions or going down 2 decimals for some elements
@@ -13,7 +14,6 @@
 		document.getElementById("shufflebutton").onclick = shuffle;
 	};
 
-	console.log(size);
 	if (size == 4) {
 		emptyR = 3; 
 		emptyC = 3; 
@@ -29,7 +29,7 @@
 	// create the divs for tiles on the board
 	function createTiles() {
 		var puzzlearea = document.getElementById("puzzlearea");
-		for (var i = 1; i < 25; i++) { // change max forloop based on x^2
+		for (var i = 1; i < (size * size); i++) { // change max forloop based on x^2
 			var tiles = document.createElement("div");
 			tiles.className = "tiles";
 			tiles.innerHTML = i; // print numbers for each tile
@@ -55,7 +55,7 @@
 			}
 
 			col -= pixel;
-			if ((i % 4) === 3) { // reset, like a typewriter
+			if ((i % size) === (size - 1)) { // reset, like a typewriter
 				col = 0;
 				row -= pixel;
 			}
@@ -76,7 +76,7 @@
 			tiles[i].id = "tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel);
 			col -= pixel;
 			// change if statement, if 4x4, then i % 4 == 3
-			if ((i % 5) === 4) { // reset, like a typewriter 
+			if ((i % size) === (size - 1)) { // reset, like a typewriter 
 				col = 0;
 				row -= pixel;
 			}
@@ -88,15 +88,17 @@
 		var col = parseInt(this.style.left) / pixel;
 		var row = parseInt(this.style.top) / pixel;
 		var id = "tiles_" + col + "_" + row; // make the id of selected tile
-		moveBlock(id);
 		if(checkIfWon() && shuffled){
-			window.open('http://localhost/fifteen-master/score.php')
+			shuffled = false;
+			moves = 0;
+			window.open('http://localhost/fifteen-master/score.php');
 		}
+		moveBlock(id);
 	}
 
 	// randomly shuffles the tiles 
 	function shuffle() {
-		for (var i = 0; i < 1000; i++) { // create 1000 random directions for shuffle
+		for (var i = 0; i < 1; i++) { // create 1000 random directions for shuffle
 			var row = emptyR;
 			var col = emptyC;
 			var direction = parseInt(Math.random() * 4) + 1;
@@ -113,13 +115,16 @@
 			if (document.getElementById(id)) { // if the tile created is valid
 				moveBlock(id);
 			}
-			shuffled = true;
 		}
+		shuffled = true;
+
 	}
 
 	// swaps the empty block with the chosen block
 	function moveBlock(block) {
 		if(changable(block)) { // if the tile is changable 
+			moves++;
+			console.log(moves);
 			var id = document.getElementById(block);
 			var newR = parseInt(id.style.top);
 			var newC = parseInt(id.style.left);
