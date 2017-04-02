@@ -45,6 +45,7 @@
 	</head>
 
 	<body>
+		<?php echo $_COOKIE["moves"] ?>
 		<?php echo $body ?>
 	</body>
 </html>
