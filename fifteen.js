@@ -1,8 +1,10 @@
 (function() {
 	"use strict";
 	
-	var emptyR = 3; // empty row
-	var emptyC = 3; // empty column
+	//change these to update difficulty 
+	// ie empty = 3 means 4x4, empty = 4 means 5x5
+	var emptyR = 3;
+	var emptyC = 3;
 	var pixel = 100; // used for dimensions or going down 2 decimals for some elements
 	window.onload = function() {
 		createTiles();
@@ -10,10 +12,23 @@
 		document.getElementById("shufflebutton").onclick = shuffle;
 	};
 
+	console.log(size);
+	if (size == 4) {
+		emptyR = 3; 
+		emptyC = 3; 
+	} else if (size == 5) {
+		emptyR = 4;
+		emptyC = 4; 
+	} else if (size == 6) {
+		emptyR = 5;
+		emptyC = 5;
+	}
+
+
 	// create the divs for tiles on the board
 	function createTiles() {
 		var puzzlearea = document.getElementById("puzzlearea");
-		for (var i = 1; i < 16; i++) {
+		for (var i = 1; i < 25; i++) { // change max forloop based on x^2
 			var tiles = document.createElement("div");
 			tiles.className = "tiles";
 			tiles.innerHTML = i; // print numbers for each tile
@@ -35,7 +50,8 @@
 			tiles[i].style.backgroundPosition = col + "px " + row + "px"; // sets portion of pic
 			tiles[i].id = "tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel);
 			col -= pixel;
-			if ((i % 4) === 3) { // reset, like a typewriter
+			// change if statement, if 4x4, then i % 4 == 3
+			if ((i % 5) === 4) { // reset, like a typewriter 
 				col = 0;
 				row -= pixel;
 			}
