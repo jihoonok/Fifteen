@@ -6,6 +6,7 @@
 	var emptyR = 3;
 	var emptyC = 3;
 	var pixel = 100; // used for dimensions or going down 2 decimals for some elements
+	var shuffled = false;
 	window.onload = function() {
 		createTiles();
 		createGame();
@@ -38,6 +39,30 @@
 			puzzlearea.appendChild(tiles); // put the div in puzzlearea	
 		}
 	}
+	
+	function checkIfWon(){
+		var tiles = document.querySelectorAll("#puzzlearea .tiles"); // get all tile div
+		var row = 0;
+		var col = 0;
+		var won = true;
+		for (var i = 0; i < tiles.length; i++) {
+			console.log(tiles[i].innerHTML);
+			console.log(tiles[i].id);	
+			if(tiles[i].innerHTML != (i+1) || tiles[i].id !== "tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel)){
+				won = false;
+				break;
+				
+			}
+
+			col -= pixel;
+			if ((i % 4) === 3) { // reset, like a typewriter
+				col = 0;
+				row -= pixel;
+			}
+			
+		}
+		return won;
+	}
 
 	// assign portions of the background image to tiles
 	function createGame() {
@@ -64,6 +89,9 @@
 		var row = parseInt(this.style.top) / pixel;
 		var id = "tiles_" + col + "_" + row; // make the id of selected tile
 		moveBlock(id);
+		if(checkIfWon() && shuffled){
+			window.open('http://localhost/fifteen-master/score.php')
+		}
 	}
 
 	// randomly shuffles the tiles 
@@ -85,6 +113,7 @@
 			if (document.getElementById(id)) { // if the tile created is valid
 				moveBlock(id);
 			}
+			shuffled = true;
 		}
 	}
 
