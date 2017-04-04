@@ -1,55 +1,87 @@
 <?php
- session_start();
-    if(isset($_POST["submit"]) && isset($_FILES["fileToUpload"])) {
-        $target_dir = "css/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-        // Check if image file is a actual image or fake image
+	define ("MAX_SIZE","750");
+	session_start();
+    if(isset($_POST["submit"]) && isset($_FILES["fileToUpload"])) {    
+		$errors=0;
 
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                echo "File is not an image.";
-                $uploadOk = 0;
-            }
+        $image =$_FILES["fileToUpload"]["name"];
+		$uploadedfile = $_FILES['fileToUpload']['tmp_name'];
 
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
-        // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
-        }
-        // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
-        }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-				$_SESSION["image"] = basename( $_FILES["fileToUpload"]["name"]);
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
+		if ($image) {
+			$filename = stripslashes($_FILES['fileToUpload']['name']);
+			$extension = getExtension($filename);
+			$extension = strtolower($extension);
+			if (($extension != "jpg") && ($extension != "jpeg") 
+					&& ($extension != "png") && ($extension != "gif")) {  
+				echo ' Please upload an image. ';
+				$errors=1;
+			}else{
+				$size=filesize($_FILES['fileToUpload']['tmp_name']);
+	
+				if ($size > MAX_SIZE*1024){
+					echo "You have exceeded the size limit";
+					$errors=1;
+				}
+	
+				if($extension=="jpg" || $extension=="jpeg" ){
+					$uploadedfile = $_FILES['fileToUpload']['tmp_name'];
+					$src = imagecreatefromjpeg($uploadedfile);
+				}else if($extension=="png"){
+					$uploadedfile = $_FILES['fileToUpload']['tmp_name'];
+					$src = imagecreatefrompng($uploadedfile);
+				}else {
+				$src = imagecreatefromgif($uploadedfile);
+				}
+		
+				list($width,$height)=getimagesize($uploadedfile);
+		
+				if($_POST["size"] == 4){
+					$newwidth=400;
+					$newheight=400;
+				} else if($_POST["size"] == 5){
+					$newwidth=500;
+					$newheight=500;	
+				} else if($_POST["size"] == 6){
+					$newwidth=600;
+					$newheight=600;
+				}
+		
+				$tmp=imagecreatetruecolor($newwidth,$newheight);
+		
+		
+				imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
+		
+		
+				$filename = "css/". $_FILES['fileToUpload']['name'];
+				$_SESSION["image"] = $_FILES['fileToUpload']['name'];
+				$_SESSION["size"] = $_POST["size"];
+		
+				imagejpeg($tmp,$filename,100);
+		
+				imagedestroy($src);
+				imagedestroy($tmp);
+			}
+		}
+	}else if(isset($_POST["submit"])){
 		$_SESSION["size"] = $_POST["size"];
+		header("Location: fifteen.php");
+	}
+	//If no errors registred, print the success message
 
-       header("Location: fifteen.php");
-    }else if(isset($_POST["submit"])){
-		$_SESSION["size"] = $_POST["size"];
-        header("Location: fifteen.php");
+	if(isset($_POST['submit']) && !$errors) {
+		// mysql_query("update SQL statement ");
+		header("Location: fifteen.php");
+		echo "Image Uploaded Successfully!";
+	}
+	
+	
+	function getExtension($str) {
+
+         $i = strrpos($str,".");
+         if (!$i) { return ""; } 
+         $l = strlen($str) - $i;
+         $ext = substr($str,$i+1,$l);
+         return $ext;
 	}
 ?> 
 
