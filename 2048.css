@@ -1,0 +1,32 @@
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+
+#game-2048 {
+	background: #CD5C5C;
+	padding: 30px;
+	border-radius: 30px;
+	width: 30%;
+	height: 100%;
+}
+
+.col-sm-1 {
+	background: Gainsboro;
+	border: 3px solid black;
+	height: 100px;
+	width: 100px;
+	margin: 5px;
+	text-align: center;
+	cursor: default;
+}
+
+.numbered-tile {
+	background: white;
+	font-size: 250%;
+	width: 120%;
+	height: 100%;
+	padding-top: 20px;
+}
