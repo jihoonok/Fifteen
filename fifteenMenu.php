@@ -1,6 +1,7 @@
-<!-- <?php
-    if(isset($_POST["submit"])) {
-        $target_dir = realpath(dirname(getcwd()));
+<?php
+ session_start();
+    if(isset($_POST["submit"]) && isset($_FILES["fileToUpload"])) {
+        $target_dir = "css/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -38,32 +39,31 @@
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+				$_SESSION["image"] = basename( $_FILES["fileToUpload"]["name"]);
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }
         }
-    }
-?> -->
+		$_SESSION["size"] = $_POST["size"];
 
-<?php 
-    session_start();
-    if (isset($_POST["submit"])) {
-        $_SESSION["size"] = $_POST["size"];
-        echo $_SESSION["size"];
+       header("Location: fifteen.php");
+    }else if(isset($_POST["submit"])){
+		$_SESSION["size"] = $_POST["size"];
         header("Location: fifteen.php");
-    }
-?>
+	}
+?> 
+
 
 <!DOCTYPE html>
 <html>
 <body>
 
-    <form action="fifteenMenu.php" method="post" >
-        <input type="radio" name="size" value=4> 4
-        <input type="radio" name="size" value=5> 5
-        <input type="radio" name="size" value=6> 6 <br />
-<!--         Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload"> -->
+    <form action="fifteenMenu.php" method="post" enctype="multipart/form-data">
+        <input type="radio" name="size" value=4 required> 4
+        <input type="radio" name="size" value=5 required> 5
+        <input type="radio" name="size" value=6 required> 6 <br />
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" name="submit" value="Start">
     </form>
 

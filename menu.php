@@ -6,7 +6,7 @@
 		session_destroy();
 		header("Location: main.php");
 	} else if (isset($_POST["play"])) {
-		header("Location: fifteen.php");
+		header("Location: fifteenMenu.php");
 	} else if (isset($_POST["score"])) {
 		header("Location: score.php");
 	} else {
