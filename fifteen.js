@@ -89,6 +89,7 @@
 		var row = parseInt(this.style.top) / pixel;
 		var id = "tiles_" + col + "_" + row; // make the id of selected tile
 		if(checkIfWon() && shuffled){
+			document.cookie = "moves=" + moves;
 			shuffled = false;
 			moves = 0;
 			window.open('http://localhost/fifteen-master/score.php');
