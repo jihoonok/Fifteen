@@ -1,5 +1,6 @@
 <?php
 	require_once("support.php");
+	require_once("init_database.php");
 	session_start();
 	
 	$title = "Dennis the Penis";
