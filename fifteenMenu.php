@@ -89,13 +89,13 @@
 <!DOCTYPE html>
 <html><head>
 		<meta charset="utf-8">
-		<title>Fifteen Menu</title>			
+		<title>Fifteen Settings</title>			
 		<link rel="stylesheet" type="text/css"  href="css/15menu.css"/>
 </head>
 <body>
 	<div class="menu">	
         <form action="fifteenMenu.php" method="post" enctype="multipart/form-data">
-        	<h1><u>Fifteen-Puzzle Menu</u></h1>
+        	<h1><u>Fifteen-Puzzle Settings</u></h1>
         	<strong>Select Level of Dificulty:</strong><br /><br />
             <input class="radio" type="radio" name="size" value=4 id="4" required>
             <label for="4"> Level 1 - 4x4 Grid </label><br /> 

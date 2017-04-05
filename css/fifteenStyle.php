@@ -12,6 +12,12 @@ body {
 	text-align: center;
 	font-size: 14pt;
 	font-family: cursive;
+    background: url(../backgrounds/blackwood.jpg);
+}
+
+h1, h2, h3 {
+	color: white;
+    font-family: 'Open Sans', Arial, sans-serif;
 }
 
 #puzzlearea {
@@ -22,8 +28,25 @@ body {
 	margin-right: auto;
 }
 
+.submit{
+  background: #E58133;
+  width: 15%;
+  height: 3em;
+  color: white;
+  cursor: pointer;
+  border: 0;
+}
+
+.submit:hover {
+  background: #FF5F00;
+}
+
+#shufflebutton{
+	width: 30%;
+}
+
 .tiles {
-	border: 5px solid black;
+	border: 3px solid black;
 	cursor: default;
 }
 
