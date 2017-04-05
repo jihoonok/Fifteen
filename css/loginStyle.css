@@ -16,6 +16,9 @@ after { clear: both; }
 .login {
   margin: 8em auto;
   width: 22em;
+  color: white;
+  font-family: 'Open Sans', Arial, sans-serif;
+  text-align:center;
 }
 
 .login form {

@@ -1,4 +1,5 @@
 <?php session_start() ?>
+
 body {
 	text-align: center;
 	font-size: 14pt;

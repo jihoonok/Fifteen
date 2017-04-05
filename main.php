@@ -12,9 +12,7 @@
 			<input type="text" name="login" placeholder="Username" required="true"/><br/>
           	<input type="password" name="password" placeholder="Password" required="true" /><br/>
 	      	<input class="submit" type="submit" name="submit" value="Sign In">
-			<a href="createaccount.php"><button class="submit" type="button">Sign Up</button></a><br>
-		</form>	
-			
+			<a href="createaccount.php"><button class="submit" type="button">Sign Up</button></a><br>			
 EOBODY;
 	
 
@@ -33,24 +31,23 @@ EOBODY;
 			$result = mysqli_query($db, $sqlQuery);
 			if ($result) {
 				while ($recordArray = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-					if ($recordArray["name"] == $nameValue && password_verify($passwordValue, $recordArray["password"])) {
-						$topPart = "";
+					if ($recordArray["username"] == $nameValue && password_verify($passwordValue, $recordArray["password"])) {
 						$_SESSION["passwordValue"] = $passwordValue;
 						$_SESSION["userNameValue"] = $nameValue;
 						header("Location: menu.php");
 					}
 				}
-				$bottomPart = "<h3>Invalid login information provided.</h3><br />";
+				$bottomPart = "<h3>Invalid login information provided.</h3>";
 				$passwordValue = "";
 				$nameValue = "";						
-				$body = "<div class=\"login\">".$topPart.$bottomPart."<div>";
-				$page = generatePage($body, $title);
+				$body = "<div class=\"login\">".$topPart.$bottomPart."</form></div>";
+				$page = generatePage($body, $title, $style);
 				echo $page;
 			} else {
 				$body = "Retrieving records failed.".mysqli_error($db);
 			}
 		} else {
-			$body = "<div class=\"login\">".$topPart."<div>";
+			$body = "<div class=\"login\">".$topPart."</form></div>";
 			$page = generatePage($body, $title, $style);
 			echo $page;	
 		}		

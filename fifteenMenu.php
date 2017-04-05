@@ -48,10 +48,8 @@
 		
 				$tmp=imagecreatetruecolor($newwidth,$newheight);
 		
-		
 				imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
-		
-		
+		 		
 				$filename = "css/". $_FILES['fileToUpload']['name'];
 				$_SESSION["image"] = $_FILES['fileToUpload']['name'];
 				$_SESSION["size"] = $_POST["size"];
@@ -87,17 +85,27 @@
 
 
 <!DOCTYPE html>
-<html>
+<html><head>
+		<meta charset="utf-8">
+		<title>Fifteen Menu</title>			
+		<link rel="stylesheet" type="text/css"  href="css/15menu.css"/>
+</head>
 <body>
-
-    <form action="fifteenMenu.php" method="post" enctype="multipart/form-data">
-        <input type="radio" name="size" value=4 required> 4
-        <input type="radio" name="size" value=5 required> 5
-        <input type="radio" name="size" value=6 required> 6 <br />
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" name="submit" value="Start">
-    </form>
-
+	<div class="menu">	
+        <form action="fifteenMenu.php" method="post" enctype="multipart/form-data">
+        	<h1><u>Fifteen-Puzzle Menu</u></h1>
+        	<strong>Select Level of Dificulty:</strong><br /><br />
+            <input class="radio" type="radio" name="size" value=4 id="4" required>
+            <label for="4"> Level 1 - 4x4 Grid </label><br /> 
+            <input class="radio" type="radio" name="size" value=5 id="5" required>
+            <label for="5"> Level 2 - 5x5 Grid </label><br />
+            <input class="radio" type="radio" name="size" value=6 id="6" required>
+            <label for="6"> Level 3 - 6x6 Grid </label><br /><br />
+            <strong>Select Image to Upload:</strong><br /><br />
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input class="submit" type="submit" name="submit" value="Start">
+            <a href="menu.php"><button class="submit" type="button">Main Menu</button></a><br>
+        </form>
+	</div>
 </body>
 </html>

@@ -3,6 +3,12 @@
 ?>
 
 <?php
+	$auth = "";
+	
+	if (isset($_POST["signin"])) {
+		header("Location: main.php");
+	}
+
 	if (isset($_POST["submitButton"])) {
 		if ($_POST["password"] == $_POST["confirmpass"]) {
 			$host = "localhost";
@@ -17,14 +23,14 @@
 			$name = trim($_POST["name"]);
 			$password = password_hash(trim($_POST["password"]), PASSWORD_DEFAULT);
 
-			$sqlQuery = sprintf("insert into $table (name, password) values ('%s', '%s')", $name, $password);
+			$sqlQuery = sprintf("insert into $table values ('%s', '%s')", $name, $password);
 			$result = mysqli_query($db, $sqlQuery);
 			if ($result) {
 				echo "Account creation successful";
 				header("Location: main.php");
 				
 			} else {
-				echo "Account creation failed";
+				$auth = "<h3>Username Already In Use</h3><br/>";
 			}
 			mysqli_close($db);
 		}
@@ -43,16 +49,23 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Log In</title>
+		<title>Create Account</title>
           <link rel="stylesheet" type="text/css"  href="css/signUpStyle.css"/>
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 		  	<script>
+			//This var is used to determine which submit button was clicked
+			var clicked;
 			function validateForm() {
+				
+				if(clicked) {
+					return;
+				}
+				
 			    var x = document.forms["myForm"]["name"].value;
 			    if (x == "") {
-			        alert("Name must be filled out");
+			        alert("Username must be filled out");
 			        return false;
 			    }
 
@@ -95,7 +108,9 @@
 				<strong>Username: </strong><input type="text" name="name"/><br /><br />
 				<strong>Password: </strong><input type="password" name="password"/><br /><br />
 				<strong>Confirm Password: </strong><input type="password" name="confirmpass"/><br /><br />
-                <input class="submit" type="submit" name="submitButton" value="Create">
+                <input class="submit" type="submit" name="submitButton" onClick="clicked=0" value="Create Account">
+                <input class="submit" type="submit" name="signin" onClick="clicked=1" value="Sign In">
+                <?php echo $auth ?>
 			</form>
 		</div>
 	</body>

@@ -47,7 +47,7 @@
 		
 		//Create table for userinfo
 		$conn->query("CREATE TABLE $table1(username varchar(50) primary key, password varchar(250))");
-		
 	}
 	
+	$conn->close();
 ?>
