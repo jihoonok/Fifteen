@@ -60,7 +60,9 @@
 				imagedestroy($tmp);
 			}
 		}
-	}else if(isset($_POST["submit"])){
+	}
+	
+	if(isset($_POST["submit"])){
 		$_SESSION["size"] = $_POST["size"];
 		header("Location: fifteen.php");
 	}
