@@ -18,7 +18,7 @@ function main() {
     window.onload = function () {
         createGrid();
         printGrid(); // prints all grid contents to browser console
-        window.addEventListener('keypress',move);
+        window.addEventListener('keyup',move);
     };
     
     // creates Grid
