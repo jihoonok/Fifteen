@@ -79,7 +79,7 @@ function main() {
      * when keyboard right,left,up,down is detected this function is called
      */
     function move(event) {
-        var x = event.keyCode;
+        var x = event.keyCode || event.which;
         hasStateChanged = false;
         
         switch (x) {
