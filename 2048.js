@@ -3,7 +3,7 @@
  * tile {
     x:
     y:
-    value:
+    value:clea
     htmlElement:
  }
  **/
@@ -48,6 +48,9 @@ function main() {
     
     // inserts a random numbered tile with value 2
     function insertRndNumTile(num) {
+        if (!num) {
+            num = 1;
+        }
         var count = 0;
         var length = 0;
         while (count < num) {
@@ -79,7 +82,7 @@ function main() {
      * when keyboard right,left,up,down is detected this function is called
      */
     function move(event) {
-        var x = event.keyCode || event.which;
+        var x = event.keyCode;
         hasStateChanged = false;
         
         switch (x) {
@@ -89,6 +92,7 @@ function main() {
                 break;
             case 38:
                 console.log('up');
+                moveUp();
                 break;
             case 39:
                 console.log('right');
@@ -96,13 +100,44 @@ function main() {
                 break;
             case 40:
                 console.log('down');
+                moveDown();
                 break;
             default:
         }
         
         console.log('gridState: ' + hasStateChanged);
         if (hasStateChanged) {
-            insertRndNumTile(1);
+            setTimeout(insertRndNumTile,700);
+        }
+    }
+    
+    // visit each grid row and move blocks up
+    function moveUp() {
+        var row = [];
+        var idx = 0;
+        
+        for (var i = 0; i < grid.length ;i++) {
+            idx = 0;
+            for (var l = grid.length-1; l >= 0  ;l--) {
+                row[idx++] = grid[l][i];
+            }
+            var newRow = shiftTilesRight(row);
+            updateRow(newRow,row);
+        }
+    }
+    
+    // visit each grid row and move blocks Down
+    function moveDown() {
+        var row = [];
+        var idx = 0;
+        
+        for (var i = 0; i < grid.length ;i++) {
+            idx = 0;
+            for (var l = grid.length-1; l >= 0  ;l--) {
+                row[idx++] = grid[l][i];
+            }
+            var newRow = shiftTilesLeft(row);
+            updateRow(newRow,row);
         }
     }
     
@@ -218,7 +253,7 @@ function main() {
         }
     }
     
-    // splits a row of tile objects
+    // splits a row of tile objects in half and returns both halfs
     function splitRow(row) {
         var left = [];
         var right = [];
@@ -234,7 +269,7 @@ function main() {
         return [left,right];
     }
     
-    // splits an array of values
+    // splits an array of values in half and returns both halfs
     function splitArray(row) {
         var left = [];
         var right = [];
