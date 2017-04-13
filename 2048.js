@@ -277,7 +277,7 @@ function main() {
         }
         
         result[0] = row[0].value * row.length/2;
-        result[1] = row[1].value * row.length/2;
+        result[1] = row[row.length-1].value * row.length/2;
         
         return result;
     }
