@@ -3,7 +3,7 @@
  * tile {
     x:
     y:
-    value:clea
+    value:
     htmlElement:
  }
  **/
@@ -88,31 +88,31 @@ function main() {
         switch (x) {
             case 37:
                 console.log('left');
-                moveLeft();
+                moveLeftOrRight(shiftTilesLeft);
                 break;
             case 38:
                 console.log('up');
-                moveUp();
+                moveUpOrDown(shiftTilesRight);
                 break;
             case 39:
                 console.log('right');
-                moveRight();
+                moveLeftOrRight(shiftTilesRight);
                 break;
             case 40:
                 console.log('down');
-                moveDown();
+                moveUpOrDown(shiftTilesLeft);
                 break;
             default:
         }
         
         console.log('gridState: ' + hasStateChanged);
         if (hasStateChanged) {
-            setTimeout(insertRndNumTile,700);
+            setTimeout(insertRndNumTile,400);
         }
     }
     
-    // visit each grid row and move blocks up
-    function moveUp() {
+    // slide tiles up or down
+    function moveUpOrDown(shiftTiles) {
         var row = [];
         var idx = 0;
         
@@ -121,41 +121,16 @@ function main() {
             for (var l = grid.length-1; l >= 0  ;l--) {
                 row[idx++] = grid[l][i];
             }
-            var newRow = shiftTilesRight(row);
+            var newRow = shiftTiles(row);
             updateRow(newRow,row);
         }
     }
     
-    // visit each grid row and move blocks Down
-    function moveDown() {
-        var row = [];
-        var idx = 0;
-        
-        for (var i = 0; i < grid.length ;i++) {
-            idx = 0;
-            for (var l = grid.length-1; l >= 0  ;l--) {
-                row[idx++] = grid[l][i];
-            }
-            var newRow = shiftTilesLeft(row);
-            updateRow(newRow,row);
-        }
-    }
-    
-    // visit each grid row and move blocks to the left
-    function moveLeft() {
+    // slide tiles left or right
+    function moveLeftOrRight(shiftTiles) {
         var i = 0;
         while ( i < grid.length) {
-            var newRow = shiftTilesLeft(grid[i]);
-            updateRow(newRow,grid[i]);
-            i++;
-        }
-    }
-    
-    // visit each grid row and move blocks to the right
-    function moveRight() {
-        var i = 0;
-        while ( i < grid.length) {
-            var newRow = shiftTilesRight(grid[i]);
+            var newRow = shiftTiles(grid[i]);
             updateRow(newRow,grid[i]);
             i++;
         }
