@@ -5,41 +5,47 @@ box-sizing: border-box;
 }
 
 body {
-	width: 100%;
-	height: 100%;
-	margin: 0 auto;
 }
 
-#game-2048 {
-	background: #CD5C5C;
-	border-radius: 30px;
-	width: 450px;
-	height: 450px;
-	position: relative;
-	margin-top: 40px;
-	margin-left: auto;
-	margin-right: auto;
+.menu {
+  max-width: 510px;
+  max-height: inherit;
+  margin-left: 300px;
+  padding: 20px;
 }
 
-.row {
-	margin-top: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
+/* ---- grid ---- */
+.grid {
+  background: #CD5C5C;
+  max-width: 510px;
+  max-height: inherit;
+  margin-left: 300px;
+  padding: 50px;
+  border: 2px solid black;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 10px;
 }
 
-.col-sm-1 {
-	background: Gainsboro;
-	border: 3px solid black;
-	width: 90px;
-	height: 90px;
-	margin: 5px;
-	text-align: center;
-	cursor: default;
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
-.numbered-tile {
-	background: white;
-	font-size: 250%;
-	width: 120%;
-	height: 100%;
+/* ---- grid-item ---- */
+
+.grid-item {
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  border: 3px solid black;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+}
+
+rec, svg {
+  border: 1px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
 }
