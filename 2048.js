@@ -14,6 +14,8 @@ function main() {
     
     var grid = []; // 4 by 4 2-D grid
     var hasStateChanged = false;    // if state is true then grid state has changes
+    var currentTile;
+    var updateValue;
     
     window.onload = function () {
         createGrid();
@@ -25,23 +27,27 @@ function main() {
     function createGrid() {
         var rows = 4;
         var cols = 4;
-        var game = document.getElementById('game-2048');
+        var game = document.getElementById('grid');
+        var tileNum = 1;
         for (i = 0; i < rows ;i++) {
-            var tileRow = createTileDiv('row');
             grid[i] = [];
             for (idx = 0; idx < cols ;idx++) {
-                var tileCol = createTileDiv('col-sm-1');
+                var tileCol = createTileDiv('grid-item');
+                game.appendChild(tileCol);
+                tileCol.id = tileCol.className + "-" + tileNum;
                 var tile = {};
+                tile.number = tileNum;
                 tile.y = i;
                 tile.x = idx;
                 tile.value = 0;
-                tile.htmlElement = createTileDiv('empty');
-                tileCol.appendChild(tile.htmlElement);
-                tileRow.appendChild(tileCol);
+                tile.htmlElement = createTile(tileCol.id,tileNum++);
                 grid[i][idx] = tile;
             }
-            game.appendChild(tileRow);
         }
+        
+        $('.grid').masonry({
+            itemSelector: '.grid-item',
+        });
         
         insertRndNumTile(2);
     }
@@ -59,7 +65,7 @@ function main() {
             var tile = grid[r][c];
             if (tile.value === 0) {
                 count++;
-                makeTileNumbered(tile,2);
+                makeRndTileNumbered(tile,2);
             } else {
                 length++;
                 console.log('Length: '+length);
@@ -145,19 +151,30 @@ function main() {
      *    return a new row with the correct order.
      */
     function shiftTilesLeft(row) {
-        var newRow = checkForPairs(row);
-        if (newRow.length === 2) {
-            var i = 0;
-            while (i++ < row.length/2) {
-                newRow.push(0); 
-            }
+        var newRow;
+        var temp1 = checkForPairs(row);
+        var temp2 = checkForPattern(row);
+        
+        if (temp1.length === 2) {
+            newRow = temp1;
+        } else if (temp2.length === 2) {
+            newRow = temp2;
         } else {
             newRow = [0,0,0,0];
             var rowState = {hasChanged:0};
             var currRow = splitRow(row);
             splitThenShiftL(currRow[0],newRow,rowState);
             splitThenShiftL(currRow[1],newRow,rowState);
+            console.log(newRow);
+            
+            return newRow;
         }
+        
+        var i = 0;
+        while (i++ < row.length-2) {
+            newRow.push(0); 
+        }
+        
         console.log(newRow);
         return newRow;
     }
@@ -191,19 +208,30 @@ function main() {
      *    return a new row with the correct order.
      */
     function shiftTilesRight(row) {
-        var newRow = checkForPairs(row);
-        if (newRow.length === 2) {
-            var i = 0;
-            while (i++ < row.length/2) {
-                newRow.unshift(0); 
-            }
+        var newRow;
+        var temp1 = checkForPairs(row);
+        var temp2 = checkForPattern(row);
+        
+        if (temp1.length === 2) {
+            newRow = temp1;
+        } else if (temp2.length === 2) {
+            newRow = temp2;
         } else {
             newRow = [0,0,0,0];
             var rowState = {hasChanged:0};
             var currRow = splitRow(row);
             splitThenShiftR(currRow[1],newRow,rowState);
             splitThenShiftR(currRow[0],newRow,rowState);
+            console.log(newRow);
+            
+            return newRow;
         }
+        
+        var i = 0;
+        while (i++ < row.length-2) {
+            newRow.unshift(0); 
+        }
+        
         console.log(newRow);
         return newRow;
     }
@@ -222,6 +250,7 @@ function main() {
                 } else if (row[i] === half[0] && state.hasChanged === 0 && row[i-1] === 0) {
                     state.hasChanged = 1;
                     row[i] += half[0];
+                    
                     break;
                 }
             }
@@ -260,7 +289,8 @@ function main() {
         return [left,right];
     }
     
-    // checks if a row has 2 pairs
+    // checks if a row has 2 pairs, XXYY
+    // return [] or return [X^2,Y^2]
     function checkForPairs(row) {
         var result = [];
         
@@ -282,17 +312,51 @@ function main() {
         return result;
     }
     
+    // checks if a row has pattern of XXXX or pattern of XYXY, where x != y
+    // return [] or return [X^2,Y^2]
+    function checkForPattern(row) {
+        var result = [];
+        var prev = null;
+        
+        for (var i = 0; i < row.length ;i += 2) {
+            if (prev === null) {
+                prev = row[i];
+            } else if (prev.value !== row[i].value || prev.value === 0) {
+                return [];
+            }
+            prev =  row[i];
+        }
+        
+        prev = null;
+        for (var idx = 1; idx < row.length ;idx += 2) {
+            if (prev === null) {
+                prev = row[idx];
+            } else if (prev.value !== row[idx].value || prev.value === 0) {
+                return [];
+            }
+            prev = row[idx];
+        }
+        
+        result[0] = row[0].value * row.length/2;
+        result[1] = row[row.length-1].value * row.length/2;
+        
+        return result;
+    }
+    
     // copies the content of one row to another
     function updateRow(newRow,currRow) {
         var i = 0;
         while (i < newRow.length) {
+            
             if (newRow[i] !== currRow[i].value && newRow[i] !== 0) {
                 hasStateChanged = true;
             }
                         
-            if (newRow[i] === 0) {
+            if (newRow[i] === 0 && currRow[i].value !== 0) {
                 makeTileEmpty(currRow[i]);
-            } else {
+            } else if (newRow[i] !== 0 && currRow[i].value === 0) {
+                makeTileNumbered(currRow[i],newRow[i]);
+            } else if (newRow[i] !== 0 && currRow[i].value !== 0) {
                 makeTileEmpty(currRow[i]);
                 makeTileNumbered(currRow[i],newRow[i]);
             }
@@ -302,11 +366,16 @@ function main() {
     
     // makes a tile empty, by changing tile object values
     function makeTileEmpty(tile) {
-        tile.htmlElement.style.transition = "all 1s";
-        tile.htmlElement.className = 'empty';
-        tile.htmlElement.removeAttribute("id");
-        tile.htmlElement.innerHTML = '';
+        
+        if (!tile) {
+            tile = currentTile;
+        }
+        
+        var rec = SVG.get('rec-'+tile.number);
+        rec.fill('grey');
         tile.value = 0;
+        var text = SVG.get('value-'+tile.number);
+        text.text('');
     }
     
     // creates a tile div and return the div
@@ -316,13 +385,46 @@ function main() {
         return tile;
     }
     
+    // creates a tile div and return the div
+    function createTile(id,num) {
+        var draw = SVG(id).size(95, 95);
+        var g = draw.group();
+        var rect = draw.rect(95, 95).fill('grey').attr('stroke','black').attr('x','0').attr('y','0').attr('id',('rec-'+num));
+        var text = draw.plain('').attr('x','40').attr('y','20').attr('font-size','30').attr('id',('value-'+num)).attr('text-anchor','middle');
+        g.add(rect);
+        g.add(text);
+        return draw;
+    }
+    
+    // makes a tile numbered, by changing tile object values and assigning a number
+    function makeRndTileNumbered(tile,value) {
+        
+        if (!tile && !value) {
+            tile = currentTile;
+            value = updateValue;
+        }
+        
+        var rec = SVG.get('rec-'+tile.number);
+        rec.animate(300,'-',5).rotate(360);
+        rec.fill('AntiqueWhite');
+        tile.value = value;
+        var text = SVG.get('value-'+tile.number);
+        text.text(value+"");
+    }
+    
     // makes a tile numbered, by changing tile object values and assigning a number
     function makeTileNumbered(tile,value) {
-        tile.htmlElement.id = 't-'+tile.y+"-"+tile.x;
-        tile.htmlElement.className = 'numbered-tile';
-        tile.htmlElement.innerHTML = value;
+        
+        if (!tile && !value) {
+            tile = currentTile;
+            value = updateValue;
+        }
+        
+        var rec = SVG.get('rec-'+tile.number);
+        rec.fill('AntiqueWhite');
         tile.value = value;
-        tile.htmlElement.style.transition = "all 1s";
+        var text = SVG.get('value-'+tile.number);
+        text.text(value+"");
     }
     
 }
