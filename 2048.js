@@ -27,27 +27,23 @@ function main() {
     function createGrid() {
         var rows = 4;
         var cols = 4;
-        var game = document.getElementById('grid');
         var tileNum = 1;
+        var prevX = 0, prevY = 0;
         for (i = 0; i < rows ;i++) {
             grid[i] = [];
             for (idx = 0; idx < cols ;idx++) {
-                var tileCol = createTileDiv('grid-item');
-                game.appendChild(tileCol);
-                tileCol.id = tileCol.className + "-" + tileNum;
                 var tile = {};
                 tile.number = tileNum;
-                tile.y = i;
-                tile.x = idx;
                 tile.value = 0;
-                tile.htmlElement = createTile(tileCol.id,tileNum++);
+                tile.htmlElement = createTile(tileNum++,prevX,prevY);
+                tile.y = Number(tile.htmlElement.get(0).attr('y'));
+                tile.x = Number(tile.htmlElement.get(0).attr('x'));
+                prevX += 100;
                 grid[i][idx] = tile;
             }
+            prevX = 0;
+            prevY += 100;
         }
-        
-        $('.grid').masonry({
-            itemSelector: '.grid-item',
-        });
         
         insertRndNumTile(2);
     }
@@ -114,6 +110,8 @@ function main() {
         console.log('gridState: ' + hasStateChanged);
         if (hasStateChanged) {
             setTimeout(insertRndNumTile,400);
+        } else {
+            clearTimeout();
         }
     }
     
@@ -378,22 +376,15 @@ function main() {
         text.text('');
     }
     
-    // creates a tile div and return the div
-    function createTileDiv(className) {
-        var tile = document.createElement('div');
-        tile.className = className;
-        return tile;
-    }
-    
-    // creates a tile div and return the div
-    function createTile(id,num) {
-        var draw = SVG(id).size(95, 95);
+    // create a tile and return <g></g> object
+    function createTile(num,x,y) {
+        var draw = SVG('grid');
         var g = draw.group();
-        var rect = draw.rect(95, 95).fill('grey').attr('stroke','black').attr('x','0').attr('y','0').attr('id',('rec-'+num));
-        var text = draw.plain('').attr('x','40').attr('y','20').attr('font-size','30').attr('id',('value-'+num)).attr('text-anchor','middle');
+        var rect = draw.rect(100, 100).fill('grey').attr('stroke','black').attr('x',x+5).attr('y',y+5).attr('id',('rec-'+num));
+        var text = draw.plain('').attr('x',Number(x)+40).attr('y',Number(y)+20).attr('font-size','30').attr('id',('value-'+num)).attr('text-anchor','middle');
         g.add(rect);
         g.add(text);
-        return draw;
+        return g;
     }
     
     // makes a tile numbered, by changing tile object values and assigning a number
@@ -405,7 +396,7 @@ function main() {
         }
         
         var rec = SVG.get('rec-'+tile.number);
-        rec.animate(300,'-',5).rotate(360);
+        rec.animate(300,'-',10).rotate(360);
         rec.fill('AntiqueWhite');
         tile.value = value;
         var text = SVG.get('value-'+tile.number);
