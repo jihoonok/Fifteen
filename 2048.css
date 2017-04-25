@@ -17,10 +17,9 @@ body {
 /* ---- grid ---- */
 .grid {
   background: #CD5C5C;
-  max-width: 510px;
-  max-height: inherit;
   margin-left: 300px;
-  padding: 50px;
+  padding-top: 45px;
+  padding-left: 45px;
   border: 2px solid black;
   border-color: hsla(0, 0%, 0%, 0.5);
   border-radius: 10px;
@@ -33,19 +32,9 @@ body {
   clear: both;
 }
 
-/* ---- grid-item ---- */
-
-.grid-item {
-  width: 100px;
-  height: 100px;
-  background-color: grey;
-  border: 3px solid black;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
-}
-
 rec, svg {
   border: 1px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
   border-radius: 5px;
 }
+
