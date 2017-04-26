@@ -29,11 +29,22 @@ h1 {
   font-size: 20px;
 }
 
-#menu {
+#newgame {
+  padding: 20px;
+}
+
+button {
+  background: AntiqueWhite;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+[name='menu'] {
   max-width: 510px;
   max-height: inherit;
   margin-left: 300px;
-  padding-bottom: 20px;
+  padding-left: 20px;
   padding-top: 40px;
 }
 
