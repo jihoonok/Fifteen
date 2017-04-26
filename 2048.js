@@ -1,6 +1,7 @@
 
 /*
  * tile {
+    number:
     x:
     y:
     value:
@@ -15,17 +16,34 @@ function main() {
     var grid = []; // 4 by 4 2-D grid
     var hasStateChanged = false;    // if state is true then grid state has changes
     var score = 0;
+    var rows = 4;
+    var cols = 4;
     
     window.onload = function () {
+        document.getElementById('newgame-btn').onclick = newGame;
         createGrid();
         printGrid(); // prints all grid contents to browser console
         window.addEventListener('keyup',move);
     };
     
+    function newGame() {
+        for (i = 0; i < rows ;i++) {
+            for (idx = 0; idx < cols ;idx++) {
+                makeTileEmpty(grid[i][idx]);
+            }
+        }
+        score = 0;
+        updateScore();
+        insertRndNumTile(2);
+    }
+    
+    function updateScore() {
+        var s = document.getElementById('score-value');
+        s.innerHTML = score;
+    }
+    
     // creates Grid
     function createGrid() {
-        var rows = 4;
-        var cols = 4;
         var tileNum = 1;
         var prevX = 0, prevY = 0;
         for (i = 0; i < rows ;i++) {
@@ -44,8 +62,7 @@ function main() {
             prevY += 100;
         }
         
-        var s = document.getElementById('score-value');
-        s.innerHTML = score;
+        updateScore();
         
         insertRndNumTile(2);
     }
@@ -109,8 +126,7 @@ function main() {
             default:
         }
         
-        var s = document.getElementById('score-value');
-        s.innerHTML = score;
+        updateScore();
         
         console.log('gridState: ' + hasStateChanged);
         if (hasStateChanged) {
