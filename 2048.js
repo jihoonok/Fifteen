@@ -14,8 +14,7 @@ function main() {
     
     var grid = []; // 4 by 4 2-D grid
     var hasStateChanged = false;    // if state is true then grid state has changes
-    var currentTile;
-    var updateValue;
+    var score = 0;
     
     window.onload = function () {
         createGrid();
@@ -44,6 +43,9 @@ function main() {
             prevX = 0;
             prevY += 100;
         }
+        
+        var s = document.getElementById('score-value');
+        s.innerHTML = score;
         
         insertRndNumTile(2);
     }
@@ -106,6 +108,9 @@ function main() {
                 break;
             default:
         }
+        
+        var s = document.getElementById('score-value');
+        s.innerHTML = score;
         
         console.log('gridState: ' + hasStateChanged);
         if (hasStateChanged) {
@@ -191,6 +196,7 @@ function main() {
                 } else if (row[i] === half[0] && state.hasChanged === 0 && row[i+1] === 0) {
                     state.hasChanged = 1;
                     row[i] += half[0];
+                    score += row[i];
                     break;
                 }
             }
@@ -248,7 +254,7 @@ function main() {
                 } else if (row[i] === half[0] && state.hasChanged === 0 && row[i-1] === 0) {
                     state.hasChanged = 1;
                     row[i] += half[0];
-                    
+                    score += row[i];
                     break;
                 }
             }
@@ -306,6 +312,7 @@ function main() {
         
         result[0] = row[0].value * row.length/2;
         result[1] = row[row.length-1].value * row.length/2;
+        score += result[0] + result[1];
         
         return result;
     }
@@ -337,6 +344,7 @@ function main() {
         
         result[0] = row[0].value * row.length/2;
         result[1] = row[row.length-1].value * row.length/2;
+        score += result[0] + result[1];
         
         return result;
     }
