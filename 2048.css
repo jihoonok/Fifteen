@@ -7,11 +7,30 @@ box-sizing: border-box;
 body {
 }
 
-.menu {
+#note {
+  font-size: 20px;
+}
+
+#score{
+  width: 60px;
+  padding-top: 5px;
+  padding-left: 5px;
+  text-align: center;
+  background: AntiqueWhite;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+#score-value {
+  font-size: 20px;
+}
+
+#menu {
   max-width: 510px;
   max-height: inherit;
   margin-left: 300px;
-  padding: 20px;
+  padding-bottom: 20px;
+  padding-top: 40px;
 }
 
 /* ---- grid ---- */
