@@ -11,6 +11,10 @@ body {
   font-size: 20px;
 }
 
+h1 {
+  font-size: 60px;
+}
+
 #score{
   width: 60px;
   padding-top: 5px;
