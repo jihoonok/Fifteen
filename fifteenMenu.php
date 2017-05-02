@@ -1,7 +1,23 @@
 <?php
 	define ("MAX_SIZE","750");
 	session_start();
+	
+		
+		
     if(isset($_POST["submit"]) && isset($_FILES["fileToUpload"])) {    
+		$host = "localhost";
+		$user = "dbuser";
+		$password = "goodbyeWorld";
+		$database = "groupdb";
+		$table = "scores";
+		$conn = new mysqli($host, $user, $password,$database);
+
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+		echo "Connected successfully";
+		
 		$errors=0;
 
         $image =$_FILES["fileToUpload"]["name"];
@@ -30,7 +46,18 @@
 					$uploadedfile = $_FILES['fileToUpload']['tmp_name'];
 					$src = imagecreatefrompng($uploadedfile);
 				}else {
-				$src = imagecreatefromgif($uploadedfile);
+					$src = imagecreatefromgif($uploadedfile);
+				}
+				
+				echo "<script type=\"text/javascript\">console.log(\"hello\");</script>";
+				
+				$imgData =addslashes (file_get_contents($_FILES['fileToUpload']['tmp_name']));
+				$sqlQuery = "INSERT INTO scores
+				(image, name) VALUES ('{$imgData}', '{$_FILES['fileToUpload']['name']}');";
+				if ($conn->query($sqlQuery) === TRUE) {
+					echo "New record created successfully";
+				} else {
+					echo "Error: " . $sql . "<br>" . $conn->error;
 				}
 		
 				list($width,$height)=getimagesize($uploadedfile);
