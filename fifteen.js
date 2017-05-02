@@ -45,9 +45,7 @@
 		var row = 0;
 		var col = 0;
 		var won = true;
-		for (var i = 0; i < tiles.length; i++) {
-			console.log(tiles[i].innerHTML);
-			console.log(tiles[i].id);	
+		for (var i = 0; i < tiles.length; i++) {	
 			if(tiles[i].innerHTML != (i+1) || tiles[i].id !== "tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel)){
 				won = false;
 				break;
@@ -125,6 +123,7 @@
 	function moveBlock(block) {
 		if(changable(block)) { // if the tile is changable 
 			moves++;
+			document.getElementById("score").innerHTML = "Score: " + moves;
 			console.log(moves);
 			var id = document.getElementById(block);
 			var newR = parseInt(id.style.top);
