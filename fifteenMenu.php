@@ -9,7 +9,7 @@
 		$user = "dbuser";
 		$password = "goodbyeWorld";
 		$database = "groupdb";
-		$table = "scores";
+		$table = "fifteen_scores";
 		$conn = new mysqli($host, $user, $password,$database);
 
 		// Check connection
@@ -52,8 +52,8 @@
 				echo "<script type=\"text/javascript\">console.log(\"hello\");</script>";
 				
 				$imgData =addslashes (file_get_contents($_FILES['fileToUpload']['tmp_name']));
-				$sqlQuery = "INSERT INTO scores
-				(image, name) VALUES ('{$imgData}', '{$_FILES['fileToUpload']['name']}');";
+				$sqlQuery = "INSERT INTO fifteen_scores
+			(image, name, username) VALUES ('{$imgData}', '{$_FILES['fileToUpload']['name']}','{$_SESSION['userNameValue']}');";
 				if ($conn->query($sqlQuery) === TRUE) {
 					echo "New record created successfully";
 				} else {

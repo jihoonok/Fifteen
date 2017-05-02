@@ -5,7 +5,8 @@
 	$password = "goodbyeWorld";
 	$database = "groupdb";
 	$table1 = "userinfo";
-	$table2 = "scores";
+	$table2 = "fifteen_scores";
+	$table3 = "4096_scores";
 	
 	// Create connection to root
 	$conn = new mysqli($host,"root","");
@@ -42,8 +43,11 @@
 		//CONNECT TO NEW DATABASE AND USER
 		$conn = new mysqli($host, $user, $password, $database);	
 		
-		//Create table for scores
-		$result = $conn->query("CREATE TABLE $table2(username varchar(50) primary key, fifteen int, twenty48 int)");
+		//Create table for Fifteen scores
+		$result = $conn->query("CREATE TABLE $table2(username varchar(50) primary key, image BLOB, name varchar(255), score int)");
+		
+		//Create table for  4096 scores
+		$result = $conn->query("CREATE TABLE $table3(username varchar(50) primary key, score int)");
 		
 		//Create table for userinfo
 		$conn->query("CREATE TABLE $table1(username varchar(50) primary key, password varchar(250))");
