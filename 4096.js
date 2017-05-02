@@ -24,6 +24,10 @@ function main() {
         createGrid();
         printGrid(); // prints all grid contents to browser console
         window.addEventListener('keyup',move);
+        window.addEventListener('keydown',function (event) {
+            event.preventDefault();
+        });
+        
     };
     
     function newGame() {
@@ -80,7 +84,7 @@ function main() {
             var tile = grid[r][c];
             if (tile.value === 0) {
                 count++;
-                makeRndTileNumbered(tile,2);
+                makeRndTileNumbered(tile,4);
             } else {
                 length++;
                 console.log('Length: '+length);
