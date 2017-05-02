@@ -13,8 +13,8 @@
     <body>
     <div class='container'>
         <div class="row" name='menu'>
-            <div class='col-md-3'><h1>4096</h1></div>
-            <div class='col-md-3 col-md-offset-1' id='score'>
+            <div class='col-md-4'><h1>4096</h1></div>
+            <div class='col-md-3' id='score'>
                 <label>SCORE </label>
                 <label id='score-value'></label>
             </div>
@@ -24,8 +24,12 @@
                 <button id='newgame-btn'>New Game</button>
             </div>
         </div>
-        <svg class="grid" id="grid" width='500' height='500'>
-        </svg>
+        <div class='row'>
+            <div class='col-md-12'>
+                <svg class="grid" id="grid" width='500' height='500'>
+                </svg>
+            </div>
+        </div>
         <div class='row' id="note">
             <div class='col-sm-5'>
                 <p><strong>How to play:</strong> Use your arrow keys to move the tiles.
