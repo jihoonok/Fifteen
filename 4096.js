@@ -101,6 +101,24 @@ function main() {
             }
         }
     }
+
+    function isGameOver() {
+        for (let i = 0; i < grid.length ;i++) {
+            for (let j = 1; j < grid[i].length ;j++) {
+                if (grid[i][j-1].value === grid[i][j].value) {
+                    return false;
+                } else if (grid[j-1][i].value === grid[j][i].value) {
+                    return false;
+                } else if (grid[i][j-1].value === 0 || grid[i][j].value === 0) {
+                    return false;
+                } else if (grid[j-1][i].value === 0 || grid[j][i].value === 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
     
     /*
      * call back function
@@ -130,12 +148,16 @@ function main() {
             default:
         }
         
-        updateScore();
-        
+        updateScore();    
         console.log('gridState: ' + hasStateChanged);
-        if (hasStateChanged) {
+    
+        if (isGameOver()) {
+            console.log('game Over guys');
+        } else if (hasStateChanged) {
             insertRndNumTile();
         }
+
+
     }
     
     // slide tiles up or down
