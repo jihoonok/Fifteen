@@ -8,12 +8,14 @@ body {
   width: 100%;
 }
 
+[name='menu'] {
+  padding: .5em;
+}
+
 #note {
   font-size: 1.5em;
   text-align: left;
   padding: 1em;
-  width: 24em;
-  
 }
 
 h1 {
@@ -36,7 +38,6 @@ h1 {
 
 #newgame {
   padding-bottom: 1em;
-  width: 35.5em;
 }
 
 button {
