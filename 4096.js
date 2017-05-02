@@ -67,7 +67,6 @@ function main() {
         }
         
         updateScore();
-        
         insertRndNumTile(2);
     }
     
@@ -81,6 +80,7 @@ function main() {
         while (count < num) {
             var r = Math.floor(Math.random() * 4);
             var c = Math.floor(Math.random() * 4);
+            console.log("rnd [r][c]: "+r+" "+c);
             var tile = grid[r][c];
             if (tile.value === 0) {
                 count++;
@@ -134,9 +134,7 @@ function main() {
         
         console.log('gridState: ' + hasStateChanged);
         if (hasStateChanged) {
-            setTimeout(insertRndNumTile,400);
-        } else {
-            clearTimeout();
+            insertRndNumTile();
         }
     }
     
@@ -424,7 +422,7 @@ function main() {
         }
         
         var rec = SVG.get('rec-'+tile.number);
-        rec.animate(300,'-',10).rotate(360);
+        rec.animate(400,'-',100).rotate(360);
         rec.fill('AntiqueWhite');
         tile.value = value;
         var text = SVG.get('value-'+tile.number);
