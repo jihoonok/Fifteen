@@ -3,7 +3,7 @@
 	require_once("init_database.php");
 	session_start();
 	
-	$title = "Dennis the Penis";
+	$title = "Puzzles";
 	$style = "css/loginStyle.css";	
 	
 
