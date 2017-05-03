@@ -1,5 +1,6 @@
 <?php
 if(isset($_GET['userid']) && isset($_GET['score'])){
+	session_start();
 	
 	$host = "localhost";
 		$user = "dbuser";
@@ -23,10 +24,8 @@ if(isset($_GET['userid']) && isset($_GET['score'])){
 						while($row = $result->fetch_assoc()) {
 							 if($row["score"] === null || $row["score"] < $_GET['score']){
 								$sqlQuery = "UPDATE 4096_scores set score= '{$_GET['score']}'
-									where username = '{$_SESSION['userNameValue']}';"
+									where username = '{$_SESSION['userNameValue']}';";
 								$conn->query($sqlQuery);
-							 } else {
-							 	echo "hey man i'm in the while loop and there are issues" ;
 							 }
 						}
 					} else {
@@ -34,10 +33,8 @@ if(isset($_GET['userid']) && isset($_GET['score'])){
 					}
 $conn->close();
 				} else {
-					echo "Error: " . $sql . "<br>" . $conn->error;
+					echo "Error: " . $sqlQuery . "<br>" . $conn->error;
 				}
-} else {
-	echo 'hey man there is nothing here';
 }
 
 ?>
