@@ -5,7 +5,8 @@
 		$user = "dbuser";
 		$password = "goodbyeWorld";
 		$database = "groupdb";
-		$table = "scores";
+		$table_1 = "fifteen_scores";
+		$table_1 = "4096_scores";
 		$db = connectToDB($host, $user, $password, $database);
 
 		$sqlQuery = sprintf("select * from %s order by score asc", $table);

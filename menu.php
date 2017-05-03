@@ -6,6 +6,27 @@
 		session_destroy();
 		header("Location: main.php");
 	} else if (isset($_POST["4096"])) {
+		$host = "localhost";
+		$user = "dbuser";
+		$password = "goodbyeWorld";
+		$database = "groupdb";
+		$table = "4096_scores";
+		$conn = new mysqli($host, $user, $password,$database);
+		
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+		echo "Connected successfully";
+		
+		$sqlQuery = "INSERT INTO 4096_scores
+			(username) VALUES ('{$_SESSION['userNameValue']}');";
+				if ($conn->query($sqlQuery) === TRUE) {
+					echo "New record created successfully";
+				} else {
+					echo "Error: " . $sql . "<br>" . $conn->error;
+				}
+		
 		header("Location: 4096.php");
 	} else if (isset($_POST["fifteen"])) {
 		header("Location: fifteenMenu.php");
