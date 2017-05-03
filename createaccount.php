@@ -104,10 +104,10 @@
 	<body>
 		<div class="login">
 			<form action = "<?php echo $_SERVER['PHP_SELF']; ?>" name="myForm" method="post" onsubmit= "return validateForm()">
-            	<h1>Create Account</h1>
-				<strong>Username: </strong><input type="text" name="name"/><br /><br />
-				<strong>Password: </strong><input type="password" name="password"/><br /><br />
-				<strong>Confirm Password: </strong><input type="password" name="confirmpass"/><br /><br />
+            	<h1><u>CREATE ACCOUNT</u></h1>
+				<input type="text" name="name" placeholder="Username"/><br />
+				<input type="password" name="password" placeholder="Password"/><br />
+				<input type="password" name="confirmpass" placeholder="Confirm Password"/><br />
                 <input class="submit" type="submit" name="submitButton" onClick="clicked=0" value="Create Account">
                 <input class="submit" type="submit" name="signin" onClick="clicked=1" value="Sign In">
                 <?php echo $auth ?>
