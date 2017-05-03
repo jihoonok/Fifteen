@@ -150,25 +150,13 @@ function main() {
         
         updateScore();    
         console.log('gridState: ' + hasStateChanged);
-
-        let userid = document.getElementById('userid').value;
-            console.log(userid);
-            let xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.reponseText);
-                }
-            };
-            xmlhttp.open("GET", "savescore.php?userid="+userid+'&score='+score,true);
-            xmlhttp.send();
         
         if (isGameOver()) {
             let userid = document.getElementById('userid').value;
-            console.log(userid);
             let xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.reponseText);
+                    console.log("score updated");
                 }
             };
             xmlhttp.open("GET", "savescore.php?userid="+userid+'&score='+score,true);

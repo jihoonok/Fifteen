@@ -18,7 +18,7 @@ if(isset($_GET['userid']) && isset($_GET['score'])){
 		$sqlQuery = "Select score from 4096_scores
 			where username = '{$_SESSION['userNameValue']}';";
 			$result =$conn->query($sqlQuery);
-				if ($result === TRUE) {
+				if ($result) {
 					if ($result->num_rows > 0) {
 						// output data of each row
 						while($row = $result->fetch_assoc()) {

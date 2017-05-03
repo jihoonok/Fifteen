@@ -5,7 +5,9 @@ box-sizing: border-box;
 }
 
 body {
-  width: 100%;
+  width: auto;
+  height: auto;
+  margin-left: 30%;
   background-image: url('../backgrounds/wood.jpg');
 }
 
