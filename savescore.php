@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['userid']) && isset($_POST['score'])){
+if(isset($_GET['userid']) && isset($_GET['score'])){
 	
 	$host = "localhost";
 		$user = "dbuser";
@@ -21,10 +21,12 @@ if(isset($_POST['userid']) && isset($_POST['score'])){
 					if ($result->num_rows > 0) {
 						// output data of each row
 						while($row = $result->fetch_assoc()) {
-							 if($row["score"] === null || $row["score"] < $_POST['score']){
-								$sqlQuery = "UPDATE 4096_scores set score= '{$_POST['score']}'
+							 if($row["score"] === null || $row["score"] < $_GET['score']){
+								$sqlQuery = "UPDATE 4096_scores set score= '{$_GET['score']}'
 									where username = '{$_SESSION['userNameValue']}';"
 								$conn->query($sqlQuery);
+							 } else {
+							 	echo "hey man i'm in the while loop and there are issues" ;
 							 }
 						}
 					} else {
@@ -34,6 +36,8 @@ $conn->close();
 				} else {
 					echo "Error: " . $sql . "<br>" . $conn->error;
 				}
+} else {
+	echo 'hey man there is nothing here';
 }
 
 ?>
