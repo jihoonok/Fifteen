@@ -130,7 +130,7 @@
             <label for="5"> Level 2 - 5x5 Grid </label><br />
             <input class="radio" type="radio" name="size" value=6 id="6" required>
             <label for="6"> Level 3 - 6x6 Grid </label><br /><br />
-            <strong>Select Image to Upload:</strong><br /><br />
+            <strong>Select Image to Upload: (jpg files)</strong><br /><br />
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input class="submit" type="submit" name="submit" value="Start">
             <a href="menu.php"><button class="submit" type="button">Main Menu</button></a><br>
