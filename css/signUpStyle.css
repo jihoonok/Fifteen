@@ -11,15 +11,53 @@ input, button {
   padding: 0;
 }
 
+h1 {
+	color: black;
+}
+
 after { clear: both; }
 
 .login {
-  margin: 5em auto;
+  margin: 1em auto;
   width: 22em;
   color: white;
   font-family: 'Open Sans', Arial, sans-serif;
-  text-align:center;
+  text-align:center; 
 }
+
+.login form {
+  margin: auto;
+  margin-top: 5em;
+  padding: 1.5em;
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid #434a52;
+}
+
+.login form input {
+  border-radius: 8px 8px 8px 8px;
+  color:  #4d4d4d;
+  margin-bottom: 1em;
+  padding: 0 1em;
+  width: 20em;
+  height: 3em;
+	border: 1px solid;
+}
+
+.login .submit{
+  background: #ff944d;
+  width: 100%;
+  height: 3em;
+  color: white;
+  cursor: pointer;
+	border-radius: 8px 8px 8px 8px;
+  border: 0;
+}
+
+.login .submit:hover {
+  background: #f5873d;
+}
+/*
 
 .login form {
   margin: auto;
@@ -54,3 +92,4 @@ after { clear: both; }
 .login .submit:hover {
   background: #FF5F00;
 }
+*/

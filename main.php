@@ -9,6 +9,7 @@
 
 	$topPart = <<<EOBODY
 		<form action="{$_SERVER['PHP_SELF']}" method="post">
+			<h1><u>DENNIS THE PENIS</u></h1>
 			<input type="text" name="login" placeholder="Username" required="true"/><br/>
           	<input type="password" name="password" placeholder="Password" required="true" /><br/>
 	      	<input class="submit" type="submit" name="submit" value="Sign In">
