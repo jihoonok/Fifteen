@@ -15,7 +15,7 @@ body {
     background: url(../backgrounds/blackwood.jpg);
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
 	color: white;
     font-family: 'Open Sans', Arial, sans-serif;
 }

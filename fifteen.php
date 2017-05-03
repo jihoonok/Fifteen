@@ -26,13 +26,20 @@
 				var size = "<?php echo $sizes ?>";
             </script>
 			<script src="fifteen.js" type="text/javascript"></script>
-			<link href="https://webster.cs.washington.edu/images/fifteen/fifteen.gif"
+			<link href="https://scontent-iad3-1.xx.fbcdn.net/v/t31.0-8/17358868_10211053014954882_2699185441242309355_o.jpg?oh=529ce48c0716d4180a18ff0b88cf47d3&oe=597AE827"
 				  type="image/gif" rel="shortcut icon" />"
 		</head>
 		<body>        	
             <a href="fifteenMenu.php"><button class="submit" type="button">Settings</button></a>
             <a href="menu.php"><button class="submit" type="button">Main Menu</button></a><br>
             
+            <audio id="music" autoplay="true">
+			    <source src="hello.mp3" type="audio/mp3">
+			</audio>
+			<br />
+			&nbsp; <button class = "submit" type="button" onclick = "document.getElementById('music').pause()">Mute</button>
+			<button class = "submit" type="button" onclick = "document.getElementById('music').play()">Unmute </button>
+
         	<h1><u><?php echo $tile ?>-PUZZLE</u></h1>
             <h3>Difficulty: <?php echo $level ?></h3>
             
@@ -42,6 +49,8 @@
 				add to it as you need to
 			-->
 			</div>
+
+			<h4 id="score">Score: 0</h4>
 
 			<div id="control">
 				<p id="controls">
