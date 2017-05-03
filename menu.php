@@ -5,8 +5,8 @@
 	if (isset($_POST["logout"])) {
 		session_destroy();
 		header("Location: main.php");
-	} else if (isset($_POST["2048"])) {
-		header("Location: 4096.html");
+	} else if (isset($_POST["4096"])) {
+		header("Location: 4096.php");
 	} else if (isset($_POST["fifteen"])) {
 		header("Location: fifteenMenu.php");
 	} else if (isset($_POST["score"])) {
@@ -26,7 +26,7 @@
 				<form action="{$_SERVER['PHP_SELF']}" method="post">
 					<h1 align="center"><u>Main Menu</u></h1>
 					<input class="submit" type="submit" name="fifteen" value="15-PUZZLE"/>
-					<input class="submit" type="submit" name="2048" value="2048"/>
+					<input class="submit" type="submit" name="4096" value="4096"/>
 					<input class="submit" type="submit" name="score" value="LEADERBOARD"/>
 					<input class="submit" type="submit" name="logout", value="LOGOUT"/>
 				</form>
