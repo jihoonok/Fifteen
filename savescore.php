@@ -6,7 +6,11 @@ if(isset($_GET['userid']) && isset($_GET['score'])){
 		$user = "dbuser";
 		$password = "goodbyeWorld";
 		$database = "groupdb";
-		$table = "4096_scores";
+		if(isset($_GET['game'])){
+			$table = "fifteen_scores";
+		}else{
+			$table = "4096_scores";
+		}
 		$conn = new mysqli($host, $user, $password,$database);
 		
 		// Check connection
@@ -15,15 +19,15 @@ if(isset($_GET['userid']) && isset($_GET['score'])){
 		} 
 		echo "Connected successfully";
 		
-		$sqlQuery = "Select score from 4096_scores
-			where username = '{$_SESSION['userNameValue']}';";
+		$sqlQuery = "Select score from {$table}
+			where username = '{$_SESSION['userNameValue']}'";
 			$result =$conn->query($sqlQuery);
 				if ($result) {
 					if ($result->num_rows > 0) {
 						// output data of each row
 						while($row = $result->fetch_assoc()) {
 							 if($row["score"] === null || $row["score"] < $_GET['score']){
-								$sqlQuery = "UPDATE 4096_scores set score= '{$_GET['score']}'
+								$sqlQuery = "UPDATE {$table} set score= '{$_GET['score']}'
 									where username = '{$_SESSION['userNameValue']}';";
 								$conn->query($sqlQuery);
 							 }

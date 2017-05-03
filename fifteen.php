@@ -49,9 +49,10 @@
 
 			<h4 id="currScore">Score: 0</h4>
 
-			<form action="savescore.php" method="POST">
-				<input type="hidden" id="score" value=0>
-				<input type="hidden" id="userid" value=<?php echo $_SESSION["login"] ?> />
+			<form action="savescore.php" method="GET">
+				<input type="hidden" name="game" id="game" value=15>
+				<input type="hidden" name="score" id="score" value=0>
+				<input type="hidden" name="userid" id="userid" value=<?php echo $_SESSION["userNameValue"] ?> />
 				<input class="submit" type="submit" name="Submit", value="Finish"/>
 			</form>
 
