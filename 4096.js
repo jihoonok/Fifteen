@@ -152,28 +152,27 @@ function main() {
         console.log('gridState: ' + hasStateChanged);
 
         let userid = document.getElementById('userid').value;
-            console.log(value);
+            console.log(userid);
             let xmlhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(this.reponseText);
                 }
             };
-            xhttp.open("POST", "savescore.php?userid="+userid+'score='+score,true);
-            xhttp.send(xmlhttp);
+            xmlhttp.open("GET", "savescore.php?userid="+userid+'&score='+score,true);
+            xmlhttp.send();
         
         if (isGameOver()) {
-            console.log('game Over guys');
             let userid = document.getElementById('userid').value;
-            console.log(value);
+            console.log(userid);
             let xmlhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(this.reponseText);
                 }
             };
-            xhttp.open("POST", "savescore.php?userid="+userid+'score='+score,true);
-            xhttp.send(xmlhttp);
+            xmlhttp.open("GET", "savescore.php?userid="+userid+'&score='+score,true);
+            xmlhttp.send();
         } else if (hasStateChanged) {
             insertRndNumTile();
         }

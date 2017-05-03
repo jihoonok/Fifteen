@@ -19,23 +19,22 @@ after {
 	text-align: center;
 }
 .menu form {
-	margin: auto;
-	padding: 1em 1.5em;
-	padding-top: 0;
-	width: 100%;
-	border-radius: 5px;
-	background: #282e33;
-	border-top: 3px solid #434a52;
-	border-bottom: 3px solid #434a52;
+  	margin: auto;
+	color: black;
+  	margin-top: 5em;
+  	padding: 1.5em;
+  	width: 100%;
+  	border-radius: 5px;
+  	border: 2px solid #434a52;
 }
 .menu form input {
-	background-color: #3b4148;
-	border-radius: 0px 3px 3px 0px;
-	color: #a9a9a9;
-	margin-bottom: 1em;
-	padding: 1em;
-	width: 90%;
-	height: 2em;
+	border-radius: 8px 8px 8px 8px;
+  	color:  #4d4d4d;
+  	margin-bottom: 1em;
+  	padding: 0 1em;
+  	width: 20em;
+  	height: 3em;
+	border: 1px solid;
 }
 .menu form .radio {
 	margin: 0 -1em;
@@ -44,6 +43,7 @@ after {
 	height: 1em;
 }
 .menu .submit {
+	border-radius: 8px 8px 8px 8px;
 	background: #E58133;
 	width: 100%;
 	height: 3em;
