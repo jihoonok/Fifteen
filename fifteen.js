@@ -87,10 +87,11 @@
 		var row = parseInt(this.style.top) / pixel;
 		var id = "tiles_" + col + "_" + row; // make the id of selected tile
 		if(checkIfWon() && shuffled){
-			document.cookie = "moves=" + moves;
+			document.getElementById("score").value = moves;
+			console.log(document.getElementById("score").value);
+			alert("Your score is " + moves + " Press submit to enter your scores!");
 			shuffled = false;
 			moves = 0;
-			window.open('http://localhost/fifteen-master/score.php');
 		}
 		moveBlock(id);
 	}
@@ -123,7 +124,7 @@
 	function moveBlock(block) {
 		if(changable(block)) { // if the tile is changable 
 			moves++;
-			document.getElementById("score").innerHTML = "Score: " + moves;
+			document.getElementById("currScore").innerHTML = "Score: " + moves;
 			console.log(moves);
 			var id = document.getElementById(block);
 			var newR = parseInt(id.style.top);
