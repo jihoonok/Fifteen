@@ -45,8 +45,8 @@
 		$body .= <<< EOBODY
 			<div class="login">
 				<form action="{$_SERVER['PHP_SELF']}" method="post">
-					<h1 align="center"><u>Main Menu</u></h1>
-					<input class="submit" type="submit" name="fifteen" value="15-PUZZLE"/>
+					<h1 align="center"><u>MAIN MENU</u></h1>
+					<input class="submit" type="submit" name="fifteen" value="PUZZLE"/>
 					<input class="submit" type="submit" name="4096" value="4096"/>
 					<input class="submit" type="submit" name="score" value="LEADERBOARD"/>
 					<input class="submit" type="submit" name="logout", value="LOGOUT"/>

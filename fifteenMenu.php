@@ -122,7 +122,7 @@
 <body>
 	<div class="menu">	
         <form action="fifteenMenu.php" method="post" enctype="multipart/form-data">
-        	<h1><u>Fifteen-Puzzle Settings</u></h1>
+        	<h1><u>PUZZLE SETTINGS</u></h1>
         	<strong>Select Level of Dificulty:</strong><br /><br />
             <input class="radio" type="radio" name="size" value=4 id="4" required>
             <label for="4"> Level 1 - 4x4 Grid </label><br /> 

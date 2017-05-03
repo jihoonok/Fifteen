@@ -1,6 +1,9 @@
 body {
 	background: url(../backgrounds/wood.jpg);
+}
 
+#nelson {
+	position:relative;
 }
 
 input, button {

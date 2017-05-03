@@ -12,11 +12,11 @@ body {
 	text-align: center;
 	font-size: 14pt;
 	font-family: cursive;
-    background: url(../backgrounds/blackwood.jpg);
+    background: url(../backgrounds/wood.jpg);
 }
 
-h1, h2, h3 {
-	color: white;
+h1, h2, h3, h4 {
+	color: black;
     font-family: 'Open Sans', Arial, sans-serif;
 }
 
