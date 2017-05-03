@@ -47,7 +47,13 @@
 			-->
 			</div>
 
-			<h4 id="score">Score: 0</h4>
+			<h4 id="currScore">Score: 0</h4>
+
+			<form action="savescore.php" method="POST">
+				<input type="hidden" id="score" value=0>
+				<input type="hidden" id="userid" value=<?php echo $_SESSION["login"] ?> />
+				<input class="submit" type="submit" name="Submit", value="Finish"/>
+			</form>
 
 			<div id="control">
 				<p id="controls">
