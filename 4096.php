@@ -1,10 +1,17 @@
-<?php
-
-session_start(); 
-$user = $_SESSION["userNameValue"];
-
-$body = <<<EODATA
-            <body>
+<!DOCTYPE html>
+        <html>
+            <head> 
+                <meta charset="utf-8">
+                <title>4096</title>
+                <link rel="stylesheet" type="text/css"  href="css/bootstrap.css"/>
+                <link rel="stylesheet" type="text/css"  href="css/4096.css" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="bootstrap.js"></script>
+                <script src="svg.js"></script>
+                <script src="4096.js" type="text/javascript"></script>
+            </head>
+               <body>
+               <?php session_start()?>
                 <div class='container'>
                     <div class="row" name='menu'>
                         <div class='col-md-4'><h1>4096</h1></div>
@@ -29,29 +36,8 @@ $body = <<<EODATA
                             <p><strong>How to play:</strong> Use your arrow keys to move the tiles.
                             When two tiles with the same number touch, they merge into one!</p>        
                         </div>
-                        <input type="hidden" id="userid" value='$user'/>
+                        <input type="hidden" id="userid" value='<?php echo $_SESSION["userNameValue"]?>'/>
                     </div>
                 </div>
             </body>
-EODATA;
-
-$htmlpage = <<<EOPAGE
-        <!DOCTYPE html>
-        <html>
-            <head> 
-                <meta charset="utf-8">
-                <title>4096</title>
-                <link rel="stylesheet" type="text/css"  href="css/bootstrap.css"/>
-                <link rel="stylesheet" type="text/css"  href="css/4096.css" />
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="bootstrap.js"></script>
-                <script src="svg.js"></script>
-                <script src="4096.js" type="text/javascript"></script>
-            </head>
-                $body
         </html>
-EOPAGE; 
-
-echo $htmlpage;
-
-?>
