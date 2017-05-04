@@ -5,15 +5,19 @@
 		$user = "dbuser";
 		$password = "goodbyeWorld";
 		$database = "groupdb";
-		$table_1 = "fifteen_scores";
+		$table_2 = "fifteen_scores";
 		$table_1 = "4096_scores";
 		$db = connectToDB($host, $user, $password, $database);
 
-		$sqlQuery = sprintf("select * from %s order by score asc", $table);
+		$sqlQuery = sprintf("select * from %s order by score asc limit 10", $table_1);
+		$sqlQuery2 = sprintf("select username,image,name,score from %s order by score asc limit 10", $table_2);
+		
 		$result = mysqli_query($db, $sqlQuery);
+		$result2 = mysqli_query($db, $sqlQuery2);
 		if ($result) {
-			$body = "<h1>Scoreboard</h1>";
-			$body = "<table border=1><tbody>";
+			$body = "";
+			$body .= "<h1>Scoreboard</h1>";
+			$body .= "<table border=1><tbody>";
 			while ($recordArray = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 				$body .= "<tr>";
 				foreach ($recordArray as $value) {
@@ -25,6 +29,23 @@
 		} else {
 			$body = "Retrieving records failed.".mysqli_error($db);
 		}
+		
+		if ($result2) {
+			$body .= "<table border=1><tbody>";
+			while ($recordArray = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+				$body .= "<tr>";
+				$body .= "<td>".$recordArray['username']."</td>";
+				//Gabe image here
+				$body .= "<td><img src='css/".$recordArray['name']."'/></td>";
+				$body .= "<td>".$recordArray['score']."</td>";
+				$body .= "</tr>";
+			}
+			$body .= "</tbody></table><br />";
+		} else {
+			$body = "Retrieving records failed.".mysqli_error($db);
+		}
+		
+		
 		mysqli_close($db);	
 
 
@@ -46,7 +67,6 @@
 	</head>
 
 	<body>
-		<?php echo $_COOKIE["moves"] ?>
 		<?php echo $body ?>
 	</body>
 </html>
