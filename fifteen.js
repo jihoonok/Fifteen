@@ -46,9 +46,9 @@
 		var col = 0;
 		var won = true;
 		for (var i = 0; i < tiles.length; i++) {	
+			console.log("tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel));
 			if(tiles[i].innerHTML != (i+1) || tiles[i].id !== "tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel)){
 				won = false;
-				break;
 				
 			}
 
