@@ -11,11 +11,14 @@
                 <script src="4096.js" type="text/javascript"></script>
             </head>
                <body>
+               
+           			<a href="menu.php"><button class="submit" type="button">Main Menu</button></a><br>
                <?php session_start()?>
-                <div class='container'>
-                    <div class="row" name='menu'>
-                        <div class='col-md-4'><h1>4096</h1></div>
-                        <div class='col-md-3' id='score'>
+               
+                <div class="container">
+                    <div id="one" class="row" name='menu'>
+                        <div class='col-md-3'><h1>4096</h1></div>
+                        <div class='col-md-4' id='score'>
                             <label>SCORE </label>
                             <label id='score-value'></label>
                         </div>

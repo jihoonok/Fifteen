@@ -17,7 +17,7 @@ if(isset($_GET['userid']) && isset($_GET['score'])){
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		} 
-		echo "Connected successfully";
+		$body = "<h1>Score has been updated!</h1>"; //Connected successfully
 		
 		$sqlQuery = "Select score from {$table}
 			where username = '{$_SESSION['userNameValue']}'";
@@ -42,3 +42,21 @@ $conn->close();
 }
 
 ?>
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/> 
+        <link rel="stylesheet" type="text/css"  href="css/leaderboard.css" />
+		<title>Congratulations</title>	
+	</head>
+
+	<body>
+        <div id="box1">
+            <a href="menu.php"><button class="submit" type="button">MAIN MENU</button></a><br>
+            <div id="mybox">
+                <?php echo $body ?>
+            </div>
+        </div>
+    </body>
+</html>

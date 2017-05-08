@@ -16,8 +16,8 @@
 		$result2 = mysqli_query($db, $sqlQuery2);
 		if ($result) {
 			$body = "";
-			$body .= "<h1>Scoreboard</h1>";
-			$body .= "<table border=1><tbody>";
+			$body .= "<h1><strong><u>SCOREBOARD</u></strong></h1>";
+			$body .= "<fieldset><table border=1><legend>PUZZLE</legend><tbody><tr><th>USERNAME</th><th>SCORE</th></tr>";
 			while ($recordArray = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 				$body .= "<tr>";
 				foreach ($recordArray as $value) {
@@ -25,13 +25,13 @@
 				}
 				$body .= "</tr>";
 			}
-			$body .= "</tbody></table><br />";
+			$body .= "</tbody></table></fieldset><br />";
 		} else {
 			$body = "Retrieving records failed.".mysqli_error($db);
 		}
 		
 		if ($result2) {
-			$body .= "<table border=1><tbody>";
+			$body .= "<fieldset><table border=1><legend>4096</legend><tbody><tr><th>USERNAME</th><th>IMAGE</th><th>SCORE</th></tr>";
 			while ($recordArray = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
 				$body .= "<tr>";
 				$body .= "<td>".$recordArray['username']."</td>";
@@ -40,7 +40,7 @@
 				$body .= "<td>".$recordArray['score']."</td>";
 				$body .= "</tr>";
 			}
-			$body .= "</tbody></table><br />";
+			$body .= "</tbody></table></fieldset><br />";
 		} else {
 			$body = "Retrieving records failed.".mysqli_error($db);
 		}
@@ -63,10 +63,16 @@
 <html>
 	<head>
 		<meta charset="utf-8"/> 
+        <link rel="stylesheet" type="text/css"  href="css/leaderboard.css" />
 		<title>Scoreboard</title>	
 	</head>
 
 	<body>
-		<?php echo $body ?>
-	</body>
+        <div id="box1">
+            <a href="menu.php"><button class="submit" type="button">MAIN MENU</button></a><br>
+            <div id="mybox">
+                <?php echo $body ?>
+            </div>
+        </div>
+    </body>
 </html>

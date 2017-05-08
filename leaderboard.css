@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background: url(../backgrounds/wood.jpg);
+}
+
+#box1 {
+  margin: 1em auto;
+  width: 50%;
+  color: black;
+  font-family: 'Open Sans', Arial, sans-serif;
+  text-align:center;
+}
+
+#mybox {
+	margin-top: 1em;
+  color: black;
+  font-family: 'Open Sans', Arial, sans-serif;
+  text-align:center;
+  border-radius: 5px;
+  border: 2px solid #434a52;
+}
+
+.submit {
+  width: 22em;
+  color: white;
+  font-family: 'Open Sans', Arial, sans-serif;
+  text-align:center;
+    background: #E58133;
+  height: 3em;
+  cursor: pointer;
+  border: 0;
+}
+
+.submit:hover {
+  background: #FF5F00;
+}
+
+table {
+	margin: .5em auto;
+  	width: auto;
+	background:hsla(0,0%,100%,0.60);
+}
+
+table img{
+	width: 10em;
+}
+
+fieldset {
+	margin: 0 3em;
+}
+
+legend {
+	font-weight:bolder;
+}
