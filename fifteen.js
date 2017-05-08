@@ -46,9 +46,9 @@
 		var col = 0;
 		var won = true;
 		for (var i = 0; i < tiles.length; i++) {	
+			console.log("tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel));
 			if(tiles[i].innerHTML != (i+1) || tiles[i].id !== "tiles_" + Math.abs(col/pixel) + "_" + Math.abs(row/pixel)){
 				won = false;
-				break;
 				
 			}
 
@@ -100,7 +100,7 @@
 	function shuffle() {
 		moves = 0;
 		document.getElementById("currScore").innerHTML = "Score: " + moves;
-		for (var i = 0; i < 1; i++) { // create 1000 random directions for shuffle
+		for (var i = 0; i < 100; i++) { // create 1000 random directions for shuffle
 			var row = emptyR;
 			var col = emptyC;
 			var direction = parseInt(Math.random() * 4) + 1;

@@ -40,6 +40,12 @@
         	<h1><u>PUZZLE</u></h1>
             <h3>Difficulty: <?php echo $level ?></h3>
             
+            <div id="control">
+				<p id="controls">
+					<button class="submit" id="shufflebutton">Shuffle</button>
+				</p>
+			</div>
+            
 			<div id="puzzlearea">
 			<!--
 				this area holds the actual fifteen puzzle pieces
@@ -54,16 +60,11 @@
 				<input type="hidden" name="score" id="score" value=0>
 				<input type="hidden" name="userid" id="userid" value=<?php echo $_SESSION["userNameValue"] ?> />
 				<input class="submit" type="submit" name="Submit", value="Finish"/>
-			</form>
-
-			<div id="control">
-				<p id="controls">
-					<button class="submit" id="shufflebutton">Shuffle</button>
-				</p>
-			</div>
+			</form> <br/>
 
 			<div id="output"></div>
-            <button class = "submit" type="button" onclick = "document.getElementById('music').pause()">Mute</button>
+  
 			<button class = "submit" type="button" onclick = "document.getElementById('music').play()">Unmute </button>
+            <button class = "submit" type="button" onclick = "document.getElementById('music').pause()">Mute</button>
 		</body>
 </html>
