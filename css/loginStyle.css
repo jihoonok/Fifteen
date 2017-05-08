@@ -14,7 +14,7 @@ input, button {
   padding: 0;
 }
 
-.login h1 {
+.login h1,h3 {
 	color: black;
 }
 
