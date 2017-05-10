@@ -98,9 +98,8 @@
 
 	// randomly shuffles the tiles 
 	function shuffle() {
-		moves = 0;
-		document.getElementById("currScore").innerHTML = "Score: " + moves;
-		for (var i = 0; i < 100; i++) { // create 1000 random directions for shuffle
+		
+		for (var i = 0; i < 1000; i++) { // create 1000 random directions for shuffle
 			var row = emptyR;
 			var col = emptyC;
 			var direction = parseInt(Math.random() * 4) + 1;
@@ -119,6 +118,8 @@
 			}
 		}
 		shuffled = true;
+		moves = 0;
+		document.getElementById("currScore").innerHTML = "Score: " + moves;
 
 	}
 
