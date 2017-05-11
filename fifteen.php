@@ -57,7 +57,7 @@
 
 			<form action="savescore.php" method="GET">
 				<input type="hidden" name="game" id="game" value=15>
-				<input type="hidden" name="score" id="score" value=0>
+				<input type="hidden" name="score" id="score" value=1000000>
 				<input type="hidden" name="userid" id="userid" value=<?php echo $_SESSION["userNameValue"] ?> />
 				<input class="submit" type="submit" name="Submit", value="Finish"/>
 			</form> <br/>
