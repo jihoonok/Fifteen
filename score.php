@@ -17,11 +17,7 @@
 		if ($result) {
 			$body = "";
 			$body .= "<h1><strong><u>SCOREBOARD</u></strong></h1>";
-<<<<<<< HEAD
 			$body .= "<fieldset><table border=1><legend>4096</legend><tbody><tr><th>USERNAME</th><th>SCORE</th></tr>";
-=======
-			$body .= "<fieldset><table border=1><legend>PUZZLE</legend><tbody><tr><th>USERNAME</th><th>SCORE</th></tr>";
->>>>>>> origin/master
 			while ($recordArray = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 				$body .= "<tr>";
 				foreach ($recordArray as $value) {
@@ -34,12 +30,8 @@
 			$body = "Retrieving records failed.".mysqli_error($db);
 		}
 		
-		if ($result2) {
-<<<<<<< HEAD
+		if ($result2) {;
 			$body .= "<fieldset><table border=1><legend>Puzzle</legend><tbody><tr><th>USERNAME</th><th>IMAGE</th><th>SCORE</th></tr>";
-=======
-			$body .= "<fieldset><table border=1><legend>4096</legend><tbody><tr><th>USERNAME</th><th>IMAGE</th><th>SCORE</th></tr>";
->>>>>>> origin/master
 			while ($recordArray = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
 				$body .= "<tr>";
 				$body .= "<td>".$recordArray['username']."</td>";
